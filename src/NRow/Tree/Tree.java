@@ -8,6 +8,9 @@ public class Tree {
         this.root = root;
     }
 
+    public Tree() {
+    }
+
     public void constructTree() {
 
     }
@@ -18,5 +21,13 @@ public class Tree {
 
     public Node getRoot() {
         return root;
+    }
+
+    public void addChild(Node child) {
+        if (root==null) {
+            root = child;
+        } else {
+            root.addChild(child);
+        }
     }
 }

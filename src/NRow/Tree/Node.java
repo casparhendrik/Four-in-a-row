@@ -6,6 +6,7 @@ import java.util.List;
 public class Node {
 
     private List<Node> children;
+    private int[][] boardState;
 
     public Node() {
         this.children = new ArrayList<>();
@@ -24,5 +25,9 @@ public class Node {
             children = new ArrayList<>();
         }
         children.add(child);
+    }
+
+    public void setBoardState(int[][] state) {
+        this.boardState = state;
     }
 }

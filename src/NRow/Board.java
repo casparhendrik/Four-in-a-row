@@ -1,11 +1,16 @@
 package NRow;
 
+import NRow.Tree.Node;
+import NRow.Tree.Tree;
+
 import java.util.Arrays;
 
 public class Board {
   public final int width;
   public final int height;
   private int[][] boardState; // 2D integer array containing 0's, or else playerId's in case a spot has been claimed
+
+  private Tree gameStateTree;
 
   /**
    * Constructor for creating a new empty board
@@ -16,6 +21,7 @@ public class Board {
     this.width = width;
     this.height = height;
     this.boardState = new int[width][height];
+    this.gameStateTree = new Tree();
   }
 
   /**
@@ -63,6 +69,11 @@ public class Board {
     for (int i = this.boardState[0].length - 1; i >= 0; i--) {
       if (this.boardState[x][i] == 0) {
         this.boardState[x][i] = playerId;
+
+        Node node = new Node();
+        node.setBoardState(this.boardState);
+        this.gameStateTree.addChild(node);
+
         return true;
       }
     }

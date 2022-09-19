@@ -75,7 +75,7 @@ public abstract class Heuristic {
         return evaluate(player, board);
     }
 
-    public String toString() {
+        public String toString() {
         return this.name();
     }
 
