@@ -2,7 +2,8 @@ package NRow;
 
 import NRow.Players.PlayerController;
 
-public class  Game {
+
+public class Game {
   private int gameN;
   private PlayerController[] players;
   private Board gameBoard;
