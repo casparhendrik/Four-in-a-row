@@ -11,10 +11,6 @@ public class Tree {
     public Tree() {
     }
 
-    public void constructTree() {
-
-    }
-
     public void setRoot(Node root) {
         this.root = root;
     }

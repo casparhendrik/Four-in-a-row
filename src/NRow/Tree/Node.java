@@ -30,4 +30,12 @@ public class Node {
     public void setBoardState(int[][] state) {
         this.boardState = state;
     }
+
+    public Boolean isTerminalNode() {
+        if (children == null || children.size() == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
