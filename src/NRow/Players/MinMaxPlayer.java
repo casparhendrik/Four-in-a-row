@@ -89,6 +89,40 @@ public class MinMaxPlayer extends PlayerController {
         }
     }
 
+    public Integer alphaBeta(Node node, int depth, Player currentPlayer, int alpha, int beta) {
+        if (depth == 0 || node.isTerminalNode()) {
+            return 0;
+        } if (currentPlayer==Player.MAX) {
+            int value = Integer.MIN_VALUE;
+            for(Node child: node.getChildren()) {
+                switchPlayer();
+                int newValue = alphaBeta(child, depth - 1, currentPlayer, alpha, beta);
+                if (newValue > value) {
+                    value = newValue;
+                }
+                alpha = Math.max(alpha, value);
+                if (beta <= alpha) {
+                    break;
+                }
+            }
+            return value;
+        } else { // if the currentPlayer is not MAX it has to MIN
+            int value = Integer.MAX_VALUE;
+            for(Node child: node.getChildren()) {
+                switchPlayer();
+                int newValue = alphaBeta(child, depth - 1, currentPlayer, alpha, beta);
+                if (newValue < value) {
+                    value = newValue;
+                }
+                beta = Math.min(beta, value);
+                if (beta <= alpha) {
+                    break;
+                }
+            }
+            return value;
+        }
+    }
+
     /*
     Switch the state of the current player. Method is used when traversing to a different depth in the tree.
      */
