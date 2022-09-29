@@ -18,10 +18,11 @@ public class MinMaxPlayer extends PlayerController {
     }
 
     /**
-   * Implement this method yourself!
-   * @param board the current board
-   * @return column integer the player chose
-   */
+     * Implement this method yourself!
+     *
+     * @param board the current board
+     * @return column integer the player chose
+     */
     @Override
     public int makeMove(Board board) {
         int actualMove = 0;
@@ -55,17 +56,62 @@ public class MinMaxPlayer extends PlayerController {
     }
 
     public void constructTree(Integer depth, Board board) {
-        if (depth==0) {
+        if (depth == 0) {
             return;
         }
-        for(int i = 0; i < board.width; i++) {
+        for (int i = 0; i < board.width; i++) {
             if (board.isValid(i)) {
                 Board newBoard = board.getNewBoard(i, playerId);
                 Node newChild = new Node();
                 newChild.setBoardState(newBoard.getBoardState());
                 boardTree.addChild(newChild);
-                constructTree(depth-1, board);
+                constructTree(depth - 1, board);
             }
         }
+
+//    public Integer alphaBeta(Node node, int depth, Player currentPlayer, int alpha, int beta) {
+//        if (depth == 0 || node.isTerminalNode()) {
+//            return 0;
+//        } if (currentPlayer==Player.MAX) {
+//            int value = Integer.MIN_VALUE;
+//            for(Node child: node.getChildren()) {
+//                switchPlayer();
+//                int newValue = alphaBeta(child, depth - 1, currentPlayer, alpha, beta);
+//                if (newValue > value) {
+//                    value = newValue;
+//                }
+//                alpha = Math.max(alpha, value);
+//                if (beta <= alpha) {
+//                    break;
+//                }
+//            }
+//            return value;
+//        } else { // if the currentPlayer is not MAX it has to MIN
+//            int value = Integer.MAX_VALUE;
+//            for(Node child: node.getChildren()) {
+//                switchPlayer();
+//                int newValue = alphaBeta(child, depth - 1, currentPlayer, alpha, beta);
+//                if (newValue < value) {
+//                    value = newValue;
+//                }
+//                beta = Math.min(beta, value);
+//                if (beta <= alpha) {
+//                    break;
+//                }
+//            }
+//            return value;
+//        }
+//    }
+//
+//    /*
+//    Switch the state of the current player. Method is used when traversing to a different depth in the tree.
+//     */
+//    public void switchPlayer() {
+//        if (this.currentPlayer==Player.MAX) {
+//            this.currentPlayer = Player.MIN;
+//        } else {
+//            this.currentPlayer = Player.MAX;
+//        }
+//    }
     }
 }
