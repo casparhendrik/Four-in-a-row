@@ -3,10 +3,13 @@ package NRow.Tree;
 import java.util.ArrayList;
 import java.util.List;
 
+import NRow.Board;
+
 public class Node {
 
     private List<Node> children;
     private int value;
+    private Board board;
     private int action;
     public Node() {
         this.children = new ArrayList<>();
@@ -31,6 +34,14 @@ public class Node {
 
     public int getValue() {
         return this.value;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    public Board getBoard(){
+        return this.board;
     }
 
     public void setAction(int action) {
