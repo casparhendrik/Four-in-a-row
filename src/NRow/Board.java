@@ -71,12 +71,6 @@ public class Board {
     for (int i = this.boardState[0].length - 1; i >= 0; i--) {
       if (this.boardState[x][i] == 0) {
         this.boardState[x][i] = playerId;
-
-
-        Node node = new Node();
-        node.setBoardState(this.boardState);
-        this.gameStateTree.addChild(node);
-
         return true;
       }
     }

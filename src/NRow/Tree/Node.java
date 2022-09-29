@@ -6,7 +6,8 @@ import java.util.List;
 public class Node {
 
     private List<Node> children;
-    private int[][] boardState;
+    private int value;
+    private int action;
     public Node() {
         this.children = new ArrayList<>();
     }
@@ -24,8 +25,20 @@ public class Node {
         children.add(child);
     }
 
-    public void setBoardState(int[][] state) {
-        this.boardState = state;
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return this.value;
+    }
+
+    public void setAction(int action) {
+        this.action = action;
+    }
+
+    public int getAction() {
+        return this.action;
     }
 
     public Boolean isTerminalNode() {
