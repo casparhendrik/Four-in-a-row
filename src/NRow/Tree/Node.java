@@ -7,15 +7,12 @@ public class Node {
 
     private List<Node> children;
     private int[][] boardState;
-
     public Node() {
         this.children = new ArrayList<>();
     }
-
     public List<Node> getChildren() {
         return children;
     }
-
     public void setChildren(List<Node> children) {
         this.children = children;
     }
