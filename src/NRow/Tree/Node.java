@@ -7,7 +7,7 @@ import NRow.Board;
 
 public class Node {
 
-    private List<Node> children;
+    public List<Node> children;
     private int value;
     private Board board;
     private int action;

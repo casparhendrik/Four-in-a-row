@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 
 public class MinMaxPlayer extends PlayerController {
-    private int depth;
+    protected int depth;
     private Boolean isMaximumPlayer;
 
     public MinMaxPlayer(int playerId, int gameN, int depth, Heuristic heuristic, boolean isMaximumPlayer) {
@@ -35,8 +35,9 @@ public class MinMaxPlayer extends PlayerController {
         Node rootNode = new Node();
         rootNode.setBoard(board);
         constructTree(this.depth, board, rootNode, playerId);
+        System.out.println(rootNode.isTerminalNode());
         actualMove = miniMax(rootNode, this.depth, true).get(0);
-
+        System.out.println(actualMove);
         return actualMove;
     }
    
@@ -52,12 +53,12 @@ public class MinMaxPlayer extends PlayerController {
     }
 
     public ArrayList<Integer> miniMax(Node node, int depth, Boolean isMaximumPlayer) {
-        int action = 0;
         if (depth == 0 || node.isTerminalNode()) {
-            ArrayList<Integer> outArrayList = new ArrayList<>(Arrays.asList(action, heuristic.evaluateBoard(playerId, node.getBoard())));
+            ArrayList<Integer> outArrayList = new ArrayList<>(Arrays.asList(node.getAction(), heuristic.evaluateBoard(playerId, node.getBoard())));
             return outArrayList;
         } if (isMaximumPlayer) {
             int maxEval = Integer.MIN_VALUE;
+            int action = -1;
             for(Node child: node.getChildren()) {
                 int eval = miniMax(child, depth - 1, false).get(1);
                 if (eval > maxEval) {
@@ -70,6 +71,7 @@ public class MinMaxPlayer extends PlayerController {
             return outArrayList;
         } else {
             int minEval = Integer.MAX_VALUE;
+            int action = -1;
             for (Node child: node.getChildren()) {
                 int eval = miniMax(child, depth - 1, true).get(1);
                 if (eval < minEval) {
