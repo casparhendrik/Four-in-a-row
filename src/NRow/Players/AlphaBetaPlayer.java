@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class AlphaBetaPlayer extends MinMaxPlayer {
 
-    public AlphaBetaPlayer(int playerId, int gameN, int depth, Heuristic heuristic, boolean isMaximumPlayer) {
-        super(playerId, gameN, depth, heuristic, isMaximumPlayer);
+    public AlphaBetaPlayer(int playerId, int gameN, int depth, Heuristic heuristic) {
+        super(playerId, gameN, depth, heuristic);
     }
 
     @Override
@@ -20,7 +20,7 @@ public class AlphaBetaPlayer extends MinMaxPlayer {
         Node rootNode = new Node();
         rootNode.setBoard(board);
         constructTree(this.depth, board, rootNode, playerId);
-        System.out.println(rootNode.isTerminalNode());
+        System.out.println(rootNode.children);
         actualMove = alphaBeta(rootNode, this.depth, true, Integer.MIN_VALUE, Integer.MAX_VALUE).get(0);
         System.out.println(rootNode.getAction());
         return actualMove;
@@ -32,7 +32,7 @@ public class AlphaBetaPlayer extends MinMaxPlayer {
             return outArrayList;
         } if (isMaximumPlayer) {
             int maxEval = Integer.MIN_VALUE;
-            int action = node.getAction();
+            int action = 6;
             for(Node child: node.getChildren()) {
                 int eval = alphaBeta(child, depth - 1, false, alpha, beta).get(1);
                 if (eval > maxEval) {
@@ -44,12 +44,12 @@ public class AlphaBetaPlayer extends MinMaxPlayer {
                    break;
                 }
             }
-            switchPlayer();
+            // switchPlayer();
             ArrayList<Integer> outArrayList = new ArrayList<>(Arrays.asList(action, maxEval));
             return outArrayList;
         } else {
             int minEval = Integer.MAX_VALUE;
-            int action = node.getAction();
+            int action = 6;
             for (Node child: node.getChildren()) {
                 int eval = alphaBeta(child, depth - 1, true, alpha, beta).get(1);
                 if (eval < minEval) {
@@ -61,7 +61,7 @@ public class AlphaBetaPlayer extends MinMaxPlayer {
                 break;
                 }
             }
-            switchPlayer();
+            // switchPlayer();
             ArrayList<Integer> outArrayList = new ArrayList<>(Arrays.asList(action, minEval));
             return outArrayList;
         }

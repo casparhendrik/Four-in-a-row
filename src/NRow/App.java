@@ -32,11 +32,11 @@ public class App {
         // PlayerController human2 = new HumanPlayer(2, n, heuristic2);
 
         //TODO: Implement other PlayerControllers (MinMax, AlphaBeta)
-        // PlayerController minmax = new MinMaxPlayer(2, n, depth, heuristic1, false);
-        PlayerController minmax2 = new MinMaxPlayer(2, n, depth, heuristic2, false);
-        PlayerController alphabeta = new AlphaBetaPlayer(1, n, depth, heuristic1, false);
+        PlayerController minmax = new MinMaxPlayer(1, n, depth, heuristic1);
+        PlayerController minmax2 = new MinMaxPlayer(2, n, depth, heuristic2);
+        // PlayerController alphabeta = new AlphaBetaPlayer(1, n, depth, heuristic1);
 
-        PlayerController[] players = {  alphabeta,minmax2 };
+        PlayerController[] players = {  minmax,minmax2 };
 
         return players;
     }

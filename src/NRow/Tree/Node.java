@@ -10,7 +10,7 @@ public class Node {
     public List<Node> children;
     private int value;
     private Board board;
-    private int action;
+    private Integer action = null;
     public Node() {
         this.children = new ArrayList<>();
     }
@@ -48,7 +48,7 @@ public class Node {
         this.action = action;
     }
 
-    public int getAction() {
+    public Integer getAction() {
         return this.action;
     }
 
