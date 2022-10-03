@@ -27,68 +27,44 @@ public class MinMaxPlayer extends PlayerController {
     @Override
     public int makeMove(Board board) {
         int actualMove = 0;
-
-        // if (boardTree==null) {
-        //     constructTree(this.depth, board);
-        // }   
         Node rootNode = new Node();
         rootNode.setBoard(board);
         constructTree(this.depth, board, rootNode, playerId);
-        // System.out.println(rootNode.children);
-        actualMove = miniMax(rootNode, this.depth, true).get(0);
+        actualMove = miniMax(rootNode, this.depth, false).get(0);
         System.out.println("actucal move: " + actualMove + ", player: " + playerId + "/////////");
         return actualMove;
     }
-   
-    /*
-   Switch the state of the current player. Method is used when traversing to a different depth in the tree.
-    */
-    // public void switchPlayer() {
-    //     if (this.isMaximumPlayer == true) {
-    //         this.isMaximumPlayer = false;
-    //     } else {
-    //         this.isMaximumPlayer = true;
-    //     }
-    // }
 
     public ArrayList<Integer> miniMax(Node node, int depth, Boolean isMaximumPlayer) {
+        ArrayList<Integer> outArrayList;
         if (depth == 0 || node.isTerminalNode()) {
-            ArrayList<Integer> outArrayList = new ArrayList<>(Arrays.asList(node.getAction(), heuristic.evaluateBoard(playerId, node.getBoard())));
-            // System.out.println("Torch the buttom! Return: " + outArrayList);
+            outArrayList = new ArrayList<>(Arrays.asList(node.getAction(), heuristic.evaluateBoard(playerId, node.getBoard())));
             return outArrayList;
         } if (isMaximumPlayer) {
             int maxEval = Integer.MIN_VALUE;
             int action = -1;
             for(Node child: node.getChildren()) {
                 int eval = miniMax(child, depth - 1, false).get(1);
-                // System.out.println("Evaluating column " + child.getAction() + ", evaluation: " + eval);
                 if (eval > maxEval) {
                     maxEval = eval;
                     action = child.getAction();
-                    // System.out.println("Updated!!!!");
                 }
             }
-            // switchPlayer();
-            ArrayList<Integer> outArrayList = new ArrayList<>(Arrays.asList(action, maxEval));
-            // System.out.println("Returned results action + maxEval " + outArrayList);
-            return outArrayList;
+            outArrayList = new ArrayList<>(Arrays.asList(action, maxEval));
         } else {
             int minEval = Integer.MAX_VALUE;
             int action = -1;
             for (Node child: node.getChildren()) {
                 int eval = miniMax(child, depth - 1, true).get(1);
-                // System.out.println("Evaluating column " + child.getAction() + ", evaluation: " + eval);
                 if (eval < minEval) {
                     minEval = eval;
                     action = child.getAction();
-                    // System.out.println("Updated!!!!");
                 }
             }
             // switchPlayer();
-            ArrayList<Integer> outArrayList = new ArrayList<>(Arrays.asList(action, minEval));
-            // System.out.println("Returned results action + minEval " + outArrayList);
-            return outArrayList;
+            outArrayList = new ArrayList<>(Arrays.asList(action, minEval));
         }
+        return outArrayList;
     }
 
     public void constructTree(Integer depth, Board board, Node rootNode, int currentId) {
@@ -101,55 +77,20 @@ public class MinMaxPlayer extends PlayerController {
         if (depth == 0 || Game.winning(board.getBoardState(),gameN)!=0) {
             return;
         }
-        // // boardTree = new Tree();
         for (int i = 0; i < board.width; i++) {
             if (board.isValid(i)) {
                 Board newBoard = board.getNewBoard(i, currentId);
                 Node newChild = new Node();
-                // newChild.setValue(heuristic.evaluateBoard(childId, newBoard));
                 newChild.setBoard(newBoard);
                 newChild.setAction(i);
                 rootNode.addChild(newChild);
                 constructTree(depth - 1, newBoard, newChild, childId);
             }
         }
-        }
     }
+}
 
-//    public Integer alphaBeta(Node node, int depth, Player currentPlayer, int alpha, int beta) {
-//        if (depth == 0 || node.isTerminalNode()) {
-//            return 0;
-//        } if (currentPlayer==Player.MAX) {
-//            int value = Integer.MIN_VALUE;
-//            for(Node child: node.getChildren()) {
-//                switchPlayer();
-//                int newValue = alphaBeta(child, depth - 1, currentPlayer, alpha, beta);
-//                if (newValue > value) {
-//                    value = newValue;
-//                }
-//                alpha = Math.max(alpha, value);
-//                if (beta <= alpha) {
-//                    break;
-//                }
-//            }
-//            return value;
-//        } else { // if the currentPlayer is not MAX it has to MIN
-//            int value = Integer.MAX_VALUE;
-//            for(Node child: node.getChildren()) {
-//                switchPlayer();
-//                int newValue = alphaBeta(child, depth - 1, currentPlayer, alpha, beta);
-//                if (newValue < value) {
-//                    value = newValue;
-//                }
-//                beta = Math.min(beta, value);
-//                if (beta <= alpha) {
-//                    break;
-//                }
-//            }
-//            return value;
-//        }
-//    }
-//
+
 
 
 //        // TODO: implement minmax player!

@@ -16,7 +16,6 @@ public class AlphaBetaPlayer extends MinMaxPlayer {
     @Override
     public int makeMove(Board board) {
         int actualMove = 0;
-
         Node rootNode = new Node();
         rootNode.setBoard(board);
         constructTree(this.depth, board, rootNode, playerId);
@@ -27,8 +26,9 @@ public class AlphaBetaPlayer extends MinMaxPlayer {
     }
 
     public ArrayList<Integer> alphaBeta(Node node, int depth, Boolean isMaximumPlayer, int alpha, int beta) {
+        ArrayList<Integer> outArrayList;
         if (depth == 0 || node.isTerminalNode()) {
-            ArrayList<Integer> outArrayList = new ArrayList<>(Arrays.asList(node.getAction(), heuristic.evaluateBoard(playerId, node.getBoard())));
+            outArrayList = new ArrayList<>(Arrays.asList(node.getAction(), heuristic.evaluateBoard(playerId, node.getBoard())));
             return outArrayList;
         } if (isMaximumPlayer) {
             int maxEval = Integer.MIN_VALUE;
@@ -44,9 +44,7 @@ public class AlphaBetaPlayer extends MinMaxPlayer {
                    break;
                 }
             }
-            // switchPlayer();
-            ArrayList<Integer> outArrayList = new ArrayList<>(Arrays.asList(action, maxEval));
-            return outArrayList;
+            outArrayList = new ArrayList<>(Arrays.asList(action, maxEval));
         } else {
             int minEval = Integer.MAX_VALUE;
             int action = 6;
@@ -61,9 +59,8 @@ public class AlphaBetaPlayer extends MinMaxPlayer {
                 break;
                 }
             }
-            // switchPlayer();
-            ArrayList<Integer> outArrayList = new ArrayList<>(Arrays.asList(action, minEval));
-            return outArrayList;
+            outArrayList = new ArrayList<>(Arrays.asList(action, minEval));
         }
+        return outArrayList;
     }
 }
