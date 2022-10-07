@@ -19,9 +19,7 @@ public class AlphaBetaPlayer extends MinMaxPlayer {
         Node rootNode = new Node();
         rootNode.setBoard(board);
         constructTree(this.depth, board, rootNode, playerId);
-        System.out.println(rootNode.children);
         actualMove = alphaBeta(rootNode, this.depth, true, Integer.MIN_VALUE, Integer.MAX_VALUE).get(0);
-        System.out.println(rootNode.getAction());
         return actualMove;
     }
 

@@ -9,8 +9,8 @@ import NRow.Players.PlayerController;
 public class App {
     public static void main(String[] args) throws Exception {
         int gameN = 4;
-        int boardWidth = 8;
-        int boardHeight = 8;
+        int boardWidth = 6;
+        int boardHeight = 7;
         int depth = 5;
 
         PlayerController[] players = getPlayers(gameN, depth, boardWidth);
@@ -28,15 +28,15 @@ public class App {
         SimpleHeuristic heuristic1 = new SimpleHeuristic(n);
         SimpleHeuristic heuristic2 = new SimpleHeuristic(n);
 
-         PlayerController human = new HumanPlayer(1, n, heuristic1);
-         PlayerController human2 = new HumanPlayer(2, n, heuristic2);
+        //  PlayerController human = new HumanPlayer(1, n, heuristic1);
+        //  PlayerController human2 = new HumanPlayer(2, n, heuristic2);
 
         //TODO: Implement other PlayerControllers (MinMax, AlphaBeta)
-        PlayerController minmax = new MinMaxPlayer(1, n, depth, heuristic1);
+        // PlayerController minmax = new MinMaxPlayer(1, n, depth, heuristic1);
         PlayerController minmax2 = new MinMaxPlayer(2, n, depth, heuristic2);
-        // PlayerController alphabeta = new AlphaBetaPlayer(1, n, depth, heuristic1);
+        PlayerController alphabeta = new AlphaBetaPlayer(1, n, depth, heuristic1);
 
-        PlayerController[] players = {human , minmax2};
+        PlayerController[] players = {alphabeta , minmax2};
 
         return players;
     }
